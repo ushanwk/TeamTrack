@@ -1,14 +1,55 @@
 import {apiRequest} from "../services/apiServices";
 
-export async function all() {
+export async function geAllEmployees() {
     const apiObject = {
         method: 'GET',
-        url: "https://examination.24x7retail.com/api/v1.0/Employees",
+        url: process.env.BASE_URL+"/api/v1.0/Employees",
         params: {},
         headers: {
-            'apiToken': "?D(G+KbPeSgVkYp3s6v9y$B&E)H@McQf",
+            'apiToken': process.env.API_KEY,
         }
     }
 
     return apiRequest(apiObject);
 }
+
+export async function addEmployee(employeeData) {
+    const apiObject = {
+        method: 'POST',
+        url: process.env.BASE_URL + "/api/v1.0/Employees",
+        headers: {
+            'apiToken': process.env.API_KEY,
+            'Content-Type': 'application/json',
+        },
+        data: employeeData,
+    }
+
+    return apiRequest(apiObject);
+}
+
+export async function updateEmployee(employeeId, updatedData) {
+    const apiObject = {
+        method: 'PUT',
+        url: `${process.env.BASE_URL}/api/v1.0/Employees/${employeeId}`,
+        headers: {
+            'apiToken': process.env.API_KEY,
+            'Content-Type': 'application/json',
+        },
+        data: updatedData,
+    }
+
+    return apiRequest(apiObject);
+}
+
+export async function deleteEmployee(employeeId) {
+    const apiObject = {
+        method: 'DELETE',
+        url: `${process.env.BASE_URL}/api/v1.0/Employees/${employeeId}`,
+        headers: {
+            'apiToken': process.env.API_KEY,
+        }
+    }
+
+    return apiRequest(apiObject);
+}
+

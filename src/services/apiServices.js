@@ -6,5 +6,6 @@ export const apiRequest = (apiObject) => {
         url: apiObject.url,
         headers: apiObject.headers,
         params: apiObject.params,
+        data: apiObject.data,
     });
 }
